@@ -14,6 +14,7 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.NoCache;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -60,15 +61,13 @@ public class ParkGrabber {
     }
 
     public void grabAndParseParks() {
-        JsonArrayRequest jsObjRequest = new JsonArrayRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+        StringRequest jsObjRequest = new StringRequest
+                (Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        Log.i("Response: ", response.toString());
-                        String jsonStr = response.toString();
-
+                    public void onResponse(String response) {
+                        Log.i("Response: ", response);
                         ParkGrabber parkGrabber = new ParkGrabber();
-                        Park[] parks = parkGrabber.parseParkArray(jsonStr);
+                        Park[] parks = parkGrabber.parseParkArray(response);
 
                         for (Park park : parks) {
                             Log.d("dumped park", park.toString());
@@ -97,10 +96,5 @@ public class ParkGrabber {
         Gson gson = new Gson();
         return gson.fromJson(response, Park[].class);
     }
-
-//    public Park[] grabShit() {
-//        Gson gson = new Gson();
-//        return gson.fromJson(mockResponse, Park[].class);
-//    }
 
 }
