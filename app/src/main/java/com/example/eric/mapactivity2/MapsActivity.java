@@ -5,12 +5,10 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -24,7 +22,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -46,17 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         thisActivity = this;
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-
-        ParkGrabber parkGrabber = new ParkGrabber();
-        Park[] parks = parkGrabber.grabShit();
-
-        for (Park park : parks) {
-            Log.d("dumped park", park.toString());
-        }
-        //TODO
-        //TODO
-        //TODO (ARE YOU SEEING THIS???)
-        //make network requests rather than use hard coded string in parkgrabber
+        ParkGrabber.getInstance().grabAndParseParks();
 
         mLocationCallback = new LocationCallback() {
             @Override

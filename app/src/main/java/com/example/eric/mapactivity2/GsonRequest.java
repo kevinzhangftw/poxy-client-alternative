@@ -1,13 +1,16 @@
 //package com.example.eric.mapactivity2;
 //
-//import com.google.android.gms.common.api.Response;
+//import com.android.volley.AuthFailureError;
+//import com.android.volley.NetworkResponse;
+//import com.android.volley.ParseError;
+//import com.android.volley.Request;
+//import com.android.volley.Response;
+//import com.android.volley.toolbox.HttpHeaderParser;
 //import com.google.gson.Gson;
 //import com.google.gson.JsonSyntaxException;
 //
 //import java.io.UnsupportedEncodingException;
 //import java.util.Map;
-//
-//import javax.xml.transform.ErrorListener;
 //
 ///**
 // * Created by eric on 9/3/17.
@@ -16,7 +19,7 @@
 //    private final Gson gson = new Gson();
 //    private final Class<T> clazz;
 //    private final Map<String, String> headers;
-//    private final Listener<T> listener;
+//    private final Response.Listener<T> listener;
 //
 //    /**
 //     * Make a GET request and return a parsed object from JSON.
@@ -26,7 +29,7 @@
 //     * @param headers Map of request headers
 //     */
 //    public GsonRequest(String url, Class<T> clazz, Map<String, String> headers,
-//                       Listener<T> listener, ErrorListener errorListener) {
+//                       Response.Listener<T> listener, Response.ErrorListener errorListener) {
 //        super(Method.GET, url, errorListener);
 //        this.clazz = clazz;
 //        this.headers = headers;
