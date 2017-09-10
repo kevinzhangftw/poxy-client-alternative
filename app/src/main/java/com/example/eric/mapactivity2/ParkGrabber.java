@@ -29,6 +29,7 @@ public class ParkGrabber {
 
     private static ParkGrabber instance;
     private RequestQueue mRequestQueue;
+    private MapsActivity mapsActivity;
     String url = "http://4cd5f260.ngrok.io/parks/nearby?latitude=49.276765&longitude=-122.917957";
 
 
@@ -66,18 +67,13 @@ public class ParkGrabber {
                     @Override
                     public void onResponse(String response) {
                         Log.i("Response: ", response);
-                        ParkGrabber parkGrabber = new ParkGrabber();
-                        Park[] parks = parkGrabber.parseParkArray(response);
+                        Park[] parks = instance.parseParkArray(response);
 
-                        for (Park park : parks) {
-                            Log.d("dumped park", park.toString());
-                        }
+                        mapsActivity.addParksToMap(parks);
                     }
                 }, new Response.ErrorListener() {
-
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
                         Log.e("Response: ", error.toString());
                     }
                 });
@@ -97,4 +93,7 @@ public class ParkGrabber {
         return gson.fromJson(response, Park[].class);
     }
 
+    public void setMapsActivity(MapsActivity mapsActivity) {
+        this.mapsActivity = mapsActivity;
+    }
 }
