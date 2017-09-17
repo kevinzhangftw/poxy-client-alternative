@@ -32,7 +32,6 @@ public class ParkGrabber {
     private MapsActivity mapsActivity;
     String url = "http://4cd5f260.ngrok.io/parks/nearby?latitude=49.276765&longitude=-122.917957";
 
-
     private String mockResponse = "[\n" +
             "{\n" +
             "    \"picture_url\": \"http://something.com/image.jpg\",\n" +

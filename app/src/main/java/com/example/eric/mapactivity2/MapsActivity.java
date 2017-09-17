@@ -24,9 +24,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationClient;
@@ -42,29 +43,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        setupCurrentLocation();
+    }
 
+    private void setupCurrentLocation() {
         thisActivity = this;
+        mLocationRequest = createLocationRequest();
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         mLocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 Location location = locationResult.getLastLocation();
-
                 LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(currentLocation).title("Marker in Burnaby"));
 //                mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
                 setCameraPosition(currentLocation);
 
-
                 CharSequence text = String.format("lat:%f lng:%f", location.getLatitude(), location.getLongitude());
                 Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
-
             }
         };
-
-        mLocationRequest = createLocationRequest();
     }
-
 
     /**
      * Manipulates the map once available.
@@ -78,18 +77,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        thisActivity = this;
         ParkGrabber.getInstance().setMapsActivity(this);
         ParkGrabber.getInstance().grabAndParseParks();
-
         setMapFace(R.string.style_label_retro);
         setMapUiSettings();
     }
 
+
+
     private void setMapUiSettings() {
         mMap.getUiSettings().setTiltGesturesEnabled(false);
         mMap.getUiSettings().setCompassEnabled(false);
-//        mMap.getUiSettings().setScrollGesturesEnabled(false);
+
     }
 
     private void setMapFace(int mSelectedStyleId) {
@@ -108,8 +108,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(destinationCameraPosition));
     }
 
-    public void addParksToMap(Park[] parks)
-    {
+    public void addParksToMap(Park[] parks) {
         for (Park park : parks) {
             LatLng ll = new LatLng(park.getLatitude(), park.getLongitude());
             mMap.addMarker(new MarkerOptions().position(ll).title(park.getName()));
@@ -119,27 +118,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onResume() {
         super.onResume();
-
         startLocationUpdates();
+        mMap.setOnMarkerClickListener(this);
     }
 
     private void startLocationUpdates() {
-
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-
             getAllPermissions();
             return;
         }
-        mFusedLocationClient.requestLocationUpdates(mLocationRequest,
-                mLocationCallback,
-                null /* Looper */);
+        mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null /* Looper */);
+
     }
 
     public void getAllPermissions() {
@@ -173,10 +162,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     protected LocationRequest createLocationRequest() {
         LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
+        mLocationRequest.setInterval(9000);
+        mLocationRequest.setFastestInterval(5000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         return mLocationRequest;
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        //TODO:
+        return false;
     }
 }
