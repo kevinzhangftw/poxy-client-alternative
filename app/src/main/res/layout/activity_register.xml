@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.eric.mapactivity2.RegisterActivity">
+    <!--On register, the user should be immediately logged in, not redirected to sign in.-->
+
+    <ImageView
+        android:id="@+id/imageView2"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="304dp"
+        app:srcCompat="@drawable/hipsterlogogenerator_1500238544988" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="312dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="myemail@example.com"
+        android:inputType="textEmailAddress"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="372dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/etPasswordConfirm"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="372dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="437dp"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:text="Register" />
+</LinearLayout>
