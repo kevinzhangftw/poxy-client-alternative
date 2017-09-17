@@ -21,7 +21,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -37,22 +39,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
         thisActivity = this;
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         mLocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 Location location = locationResult.getLastLocation();
-                // Update UI with location data
-                // ...
 
                 LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(currentLocation).title("Marker in Burnaby"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+//                mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+                setCameraPosition(currentLocation);
+
 
                 CharSequence text = String.format("lat:%f lng:%f", location.getLatitude(), location.getLongitude());
                 Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
@@ -80,10 +82,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         ParkGrabber.getInstance().setMapsActivity(this);
         ParkGrabber.getInstance().grabAndParseParks();
 
-        LatLng sydney = new LatLng(49.26646, -123.250551);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        setMapFace(R.string.style_label_retro);
+        setMapUiSettings();
+    }
 
+    private void setMapUiSettings() {
+        mMap.getUiSettings().setTiltGesturesEnabled(false);
+        mMap.getUiSettings().setCompassEnabled(false);
+//        mMap.getUiSettings().setScrollGesturesEnabled(false);
+    }
+
+    private void setMapFace(int mSelectedStyleId) {
+        MapStyleOptions style;
+        if (mSelectedStyleId == R.string.style_label_retro) {
+            style = MapStyleOptions.loadRawResourceStyle(this, R.raw.mapstyle_retro);
+        }else{
+            style = MapStyleOptions.loadRawResourceStyle(this, R.raw.mapstyle_night);
+
+        }
+        mMap.setMapStyle(style);
+    }
+
+    public void setCameraPosition(LatLng cameraPosition) {
+        CameraPosition destinationCameraPosition = new CameraPosition(cameraPosition, 15, 90, -50);
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(destinationCameraPosition));
     }
 
     public void addParksToMap(Park[] parks)
