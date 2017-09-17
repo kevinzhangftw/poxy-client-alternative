@@ -32,21 +32,9 @@ public class ParkGrabber {
     private MapsActivity mapsActivity;
     String url = "http://4cd5f260.ngrok.io/parks/nearby?latitude=49.276765&longitude=-122.917957";
 
-
-    private String mockResponse = "[\n" +
-            "{\n" +
-            "    \"picture_url\": \"http://something.com/image.jpg\",\n" +
-            "    \"name\": \"park name\",\n" +
-            "    \"id\": 1,\n" +
-            "    \"latitude\": 49.1,\n" +
-            "    \"longitude\": 120.1\n" +
-            "}\n" +
-            "]";
-
     private ParkGrabber() {
         initQueue();
     }
-
 
     private void initQueue() {
         // Instantiate the cache
@@ -61,15 +49,15 @@ public class ParkGrabber {
         mRequestQueue.start();
     }
 
-    public void grabAndParseParks() {
+    public void grabAndParseParks(final ParkCallback callback) {
         StringRequest jsObjRequest = new StringRequest
                 (Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.i("Response: ", response);
                         Park[] parks = instance.parseParkArray(response);
-
-                        mapsActivity.addParksToMap(parks);
+                        callback.onParsingFinished(parks);
+                        //mapsActivity.addParksToMap(parks);
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -88,12 +76,17 @@ public class ParkGrabber {
         return instance;
     }
 
+    interface ParkCallback {
+        void onParsingFinished(Park[] parks);
+    }
+
     public Park[] parseParkArray(String response) {
         Gson gson = new Gson();
         return gson.fromJson(response, Park[].class);
     }
 
-    public void setMapsActivity(MapsActivity mapsActivity) {
-        this.mapsActivity = mapsActivity;
-    }
+//    public void setMapsActivity(MapsActivity mapsActivity) {
+//        this.mapsActivity = mapsActivity;
+//    }
 }
+
