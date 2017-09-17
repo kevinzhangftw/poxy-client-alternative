@@ -46,8 +46,8 @@ public class SplashActivity extends AppCompatActivity {
 
         PoxyServer.authenticate(userBadge, new AuthCallback() {
             @Override
-            public void completion(boolean bool) {
-                if (bool){
+            public void completion(boolean completed) {
+                if (completed){
                     Intent mapsIntent = new Intent(getBaseContext(), MapsActivity.class);
                     startActivity(mapsIntent);
                 }else {
