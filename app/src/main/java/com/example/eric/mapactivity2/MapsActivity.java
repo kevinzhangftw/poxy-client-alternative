@@ -35,6 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private LocationRequest mLocationRequest;
     private LocationCallback mLocationCallback;
+    private Park[] parklist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +79,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         thisActivity = this;
-        ParkGrabber.getInstance().setMapsActivity(this);
-        ParkGrabber.getInstance().grabAndParseParks();
+
+        ParkGrabber.getInstance().grabAndParseParks(new ParkGrabber.ParkCallback() {
+            @Override
+            public void onParsingFinished(Park[] parks) {
+                parklist = parks;
+            }
+        });
+
+        parklist = MockGrabber.parks;
+
         setMapFace(R.string.style_label_retro);
         setMapUiSettings();
+        mMap.setOnMarkerClickListener(this);
     }
 
 
@@ -109,6 +119,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void addParksToMap(Park[] parks) {
+        parklist = parks;
         for (Park park : parks) {
             LatLng ll = new LatLng(park.getLatitude(), park.getLongitude());
             mMap.addMarker(new MarkerOptions().position(ll).title(park.getName()));
@@ -119,7 +130,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onResume() {
         super.onResume();
         startLocationUpdates();
-        mMap.setOnMarkerClickListener(this);
+
     }
 
     private void startLocationUpdates() {
@@ -135,26 +146,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (ContextCompat.checkSelfPermission(thisActivity,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) thisActivity,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
             } else {
-
-                // No explanation needed, we can request the permission.
-
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         LOCATION_PERMISSION_REQUEST_CODE);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
             }
         }
 
@@ -171,7 +168,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        //TODO:
+        Log.d("onMarkerClick", "onMarkerClick: " + parklist[0].getName());
         return false;
     }
 }
