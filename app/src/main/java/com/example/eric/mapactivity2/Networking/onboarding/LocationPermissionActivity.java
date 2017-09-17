@@ -39,7 +39,6 @@ public class LocationPermissionActivity extends AppCompatActivity {
                 startActivity(mapIntent);
             }
         }
-
     }
 
     private void printPermissionResults(int requestCode, String[] permissions, int[] grantResults) {
@@ -52,7 +51,6 @@ public class LocationPermissionActivity extends AppCompatActivity {
         {
             Log.d("grResArray", "" + grantResults[i]);
         }
-
     }
 
 }

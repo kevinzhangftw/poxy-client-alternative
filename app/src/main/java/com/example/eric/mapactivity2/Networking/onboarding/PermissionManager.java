@@ -21,7 +21,6 @@ public class PermissionManager {
     private final int LOCATION_AUDIO_STORAGE_PERMISSION_REQUEST_CODE = 1;
     private Context callerContext;
 
-
     public PermissionManager(final Context context) {
         callerContext = context;
     }
@@ -34,7 +33,6 @@ public class PermissionManager {
                             Manifest.permission.RECORD_AUDIO,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     LOCATION_AUDIO_STORAGE_PERMISSION_REQUEST_CODE);
-
         }
 
     }

@@ -20,13 +20,16 @@ public class UserState {
         if (pref.getFloat("user_id", 0) != 0){
             userBadge = new Badge(pref.getFloat("user_id", 0), pref.getString("session_token", null));
         }
-
         return userBadge;
     }
 
+    /**
+     * Set the authentication badge.
+     * @param badgeTobeSaved
+     * @param context
+     */
     public static void setBadge(Badge badgeTobeSaved, Context context){
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor e = pref.edit();
+        SharedPreferences.Editor e = PreferenceManager.getDefaultSharedPreferences(context).edit();
         e.putFloat("user_id", badgeTobeSaved.getUser_id());
         e.putString("session_token", badgeTobeSaved.getSession_token());
         e.commit();

@@ -77,7 +77,6 @@ public class PoxyServer {
         float user_id = ((Double) body.get("user_id")).floatValue();
         String session_token = (String) body.get("session_token");
         return new Badge(user_id, session_token);
-
     }
 
     public static void login(LoginCred userLoginCred, final BadgeCallback badgeCallback){
@@ -102,5 +101,4 @@ public class PoxyServer {
             }
         });
     }
-
 }

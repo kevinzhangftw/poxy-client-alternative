@@ -18,17 +18,14 @@ import com.example.eric.mapactivity2.Networking.UserState;
 
 /**
  * Created by Jonathan on 9/3/2017.
+ * This activity handles user registration and credential storage for future sign-in attempts.
  */
-
-
-
 
 public class RegisterActivity extends AppCompatActivity {
     private Button btnRegister;
     private EditText txtEmail;
     private EditText txtPassword;
     private EditText txtPasswordConfirm;
-    private Cred userCred;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
@@ -42,8 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
         txtEmail = (EditText)findViewById(R.id.etEmail);
         txtPassword = (EditText)findViewById(R.id.etPassword);
         txtPasswordConfirm = (EditText)findViewById(R.id.etPasswordConfirm);
-
         btnRegister = (Button)findViewById(R.id.btnRegister);
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,8 +54,8 @@ public class RegisterActivity extends AppCompatActivity {
      */
     private void register(){
         //Create a new credential and attempt to register it.
-        userCred = new Cred(txtEmail.getText().toString(), txtPassword.getText().toString(), txtPasswordConfirm.getText().toString());
-        PoxyServer.register(userCred, registrationCallback());
+        PoxyServer.register(new Cred(txtEmail.getText().toString(), txtPassword.getText().toString(), txtPasswordConfirm.getText().toString()),
+                registrationCallback());
     }
 
     /**
@@ -76,15 +73,8 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(getBaseContext(), "Registration failed, please try again.", Toast.LENGTH_LONG).show();
-                    userCred = null;
                 }
             }
         };
-    }
-
-    //Destroy the generated cred after we leave this page.
-    protected void onDestroy(){
-        super.onDestroy();
-        userCred = null;
     }
 }

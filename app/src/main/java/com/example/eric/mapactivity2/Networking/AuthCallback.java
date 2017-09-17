@@ -5,7 +5,5 @@ package com.example.eric.mapactivity2.Networking;
  */
 
 public interface AuthCallback {
-
     void completion(boolean success);
-
 }

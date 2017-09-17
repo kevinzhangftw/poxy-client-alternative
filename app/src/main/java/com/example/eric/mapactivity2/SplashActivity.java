@@ -22,47 +22,44 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         this.findViewById(android.R.id.content).setBackgroundColor(Color.BLACK);
         authenticateToken();
-
     }
 
+    /**
+     * Checks if the user is authenticated.
+     * If so, boots them to the map activity.
+     * If not, boots them to the sign in activity.
+     */
     private void authenticateToken() {
         if (!isNetworkConnected()) {
             Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show();
         }
-
-        //DEBUG
-//        Badge newbadge = new Badge(1, "ASDASD");
-//        UserState.setBadge(newbadge, this);
 
         Badge userBadge = UserState.getBadge(this);
         if (userBadge == null) {
             //TODO: show welcome message...
             Log.v("user state", "token is null");
             //direct to signup activity
-            Intent signinIntent = new Intent(getBaseContext(), SigninActivity.class);
-            startActivity(signinIntent);
+            startActivity(new Intent(getBaseContext(), SigninActivity.class));
         }
-//        Log.v("user state", userBadge.getSession_token());
 
         PoxyServer.authenticate(userBadge, new AuthCallback() {
             @Override
             public void completion(boolean completed) {
                 if (completed){
-                    Intent mapsIntent = new Intent(getBaseContext(), MapsActivity.class);
-                    startActivity(mapsIntent);
+                    startActivity(new Intent(getBaseContext(), MapsActivity.class));
                 }else {
-                    Intent signinIntent = new Intent(getBaseContext(), SigninActivity.class);
-                    startActivity(signinIntent);
+                    startActivity(new Intent(getBaseContext(), SigninActivity.class));
                 }
             }
         });
-
     }
 
+    /**
+     * This function does a network connectivity check.
+     * @return Whether or not the user is connected to the internet.
+     */
     private boolean isNetworkConnected() {
-//        return false;
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
         return cm.getActiveNetworkInfo() != null;
     }
 }

@@ -14,6 +14,10 @@ import com.example.eric.mapactivity2.Networking.LoginCred;
 import com.example.eric.mapactivity2.Networking.PoxyServer;
 import com.example.eric.mapactivity2.Networking.UserState;
 
+/**
+ * This activity handles sign-in attempts.
+ */
+
 public class SigninActivity extends AppCompatActivity {
 
     private Button registerButton;
@@ -34,7 +38,9 @@ public class SigninActivity extends AppCompatActivity {
     private void connectFormElements(){
         txtEmail = (EditText)findViewById(R.id.etEmail);
         txtPassword = (EditText)findViewById(R.id.etPassword);
+        signInButton = (Button)findViewById(R.id.btnSignIn);
         registerButton = (Button)findViewById(R.id.btnRegister);
+
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,7 +48,6 @@ public class SigninActivity extends AppCompatActivity {
                 startActivity(registerIntent);
             }
         });
-        signInButton = (Button)findViewById(R.id.btnSignIn);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,8 +56,19 @@ public class SigninActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * This handles sign-in attempts.
+     */
     private void signIn(){
-        BadgeCallback    ac = new BadgeCallback() {
+        PoxyServer.login(new LoginCred(txtEmail.getText().toString(), txtPassword.getText().toString()), loginCallback());
+    }
+
+    /**
+     * This function handles the login callback function sent to the sign-in function.
+     * @return
+     */
+    private BadgeCallback loginCallback(){
+        return new BadgeCallback() {
             @Override
             public void completion(boolean success, Badge badge) {
                 if (success) {
@@ -66,8 +82,6 @@ public class SigninActivity extends AppCompatActivity {
                 }
             }
         };
-
-        LoginCred userCred = new LoginCred(txtEmail.getText().toString(), txtPassword.getText().toString());
-        PoxyServer.login(userCred, ac);
     }
+
 }
