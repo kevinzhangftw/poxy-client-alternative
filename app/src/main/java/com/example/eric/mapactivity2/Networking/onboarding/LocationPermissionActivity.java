@@ -5,8 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.example.eric.mapactivity2.MapsActivity;
 import com.example.eric.mapactivity2.R;
+
+import com.example.eric.mapactivity2.MapsActivity;
 
 public class LocationPermissionActivity extends AppCompatActivity {
 
@@ -15,6 +16,7 @@ public class LocationPermissionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_location_permission);
         permissionMan = new PermissionManager(this);
 
