@@ -18,7 +18,8 @@ import com.android.volley.toolbox.StringRequest;
  */
 
 public class MockGrabber {
-    private static Park park1 = new Park("http://something.com/image.jpg", "park name", 1, 49.1, 120.1);
+    //Park - Image, Name, wind, temp, clouds
+    private static Park park1 = new Park("https://img.buzzfeed.com/buzzfeed-static/static/2014-10/8/10/enhanced/webdr10/enhanced-buzz-26742-1412779892-19.jpg", "Burnaby Mountain Parks and Trails", 1, 49.1, 120.1, "slow", 28, "little");
     public static Park[] parks = {park1};
 
 }

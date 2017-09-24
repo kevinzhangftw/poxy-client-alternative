@@ -6,21 +6,27 @@ package com.example.eric.mapactivity2;
 
 public class Park {
 
-    String picture_url;
-    String name;
-    int id;
-    double latitude;
-    double longitude;
+    private String picture_url;
+    private String name;
+    private int id;
+    private double latitude;
+    private double longitude;
+    private String wind;
+    private int temperature;
+    private String cloud;
 
     public Park() {
     }
 
-    public Park(String picture_url, String name, int id, double latitude, double longitude) {
+    public Park(String picture_url, String name, int id, double latitude, double longitude, String wind, int temperature, String cloud) {
         this.picture_url = picture_url;
         this.name = name;
         this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.wind = wind;
+        this.temperature = temperature;
+        this.cloud = cloud;
     }
 
     public String getPicture_url() {
@@ -62,4 +68,10 @@ public class Park {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    public String getWind(){return wind;}
+
+    public int getTemperature(){return temperature;}
+
+    public String getCloud(){return cloud;}
 }

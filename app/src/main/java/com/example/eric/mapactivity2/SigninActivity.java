@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.eric.mapactivity2.Networking.Badge;
@@ -20,6 +21,7 @@ import com.example.eric.mapactivity2.Networking.UserState;
 
 public class SigninActivity extends AppCompatActivity {
 
+    private ImageView imgLogo;
     private Button registerButton;
     private Button signInButton;
     private EditText txtEmail;
@@ -40,6 +42,7 @@ public class SigninActivity extends AppCompatActivity {
         txtPassword = (EditText)findViewById(R.id.etPassword);
         signInButton = (Button)findViewById(R.id.btnSignIn);
         registerButton = (Button)findViewById(R.id.btnRegister);
+        imgLogo = (ImageView)findViewById(R.id.imgLogo);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +55,14 @@ public class SigninActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 signIn();
+            }
+        });
+
+        imgLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent parkListintent = new Intent(getBaseContext(), ParkDetailActivity.class);
+                startActivity(parkListintent);
             }
         });
     }

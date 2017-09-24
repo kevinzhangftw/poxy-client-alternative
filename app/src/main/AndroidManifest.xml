@@ -44,7 +44,7 @@
         </activity>
         <activity android:name=".MapsActivity" />
         <activity android:name=".SplashActivity" />
-        <activity android:name=".ParkListActivity" />
+        <activity android:name=".ParkDetailActivity" />
         <activity android:name=".SigninActivity"/>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".Networking.onboarding.LocationPermissionActivity"></activity>

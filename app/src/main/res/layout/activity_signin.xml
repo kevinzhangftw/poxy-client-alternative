@@ -14,7 +14,7 @@
         tools:layout_editor_absoluteX="8dp">
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/imgLogo"
             android:layout_width="match_parent"
             android:layout_height="304dp"
             app:srcCompat="@drawable/hipsterlogogenerator_1500238544988"
