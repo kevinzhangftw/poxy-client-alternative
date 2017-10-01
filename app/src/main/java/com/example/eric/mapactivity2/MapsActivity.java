@@ -28,6 +28,9 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.HashMap;
+import java.util.Map;
+
 //Should be renamed to parklistactivity
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -40,6 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationCallback mLocationCallback;
     private Park[] parklist;
     private Marker curMarker;
+    private Map<Marker, Park> parkMarkerTrackMap = new HashMap<Marker, Park>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,8 +143,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void addParksToMap(Park[] parks) {
         for (Park park : parks) {
             LatLng ll = new LatLng(park.getLatitude(), park.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(ll).title(park.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-            //need to attach a listener to each marker.
+            MarkerOptions newMarkerOptions = new MarkerOptions()
+                    .position(ll)
+                    .title(park.getName())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+
+            //Map each marker to map
+            Marker marker = mMap.addMarker(newMarkerOptions);
+            parkMarkerTrackMap.put(marker, park);
         }
     }
 
@@ -184,9 +194,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return mLocationRequest;
     }
 
+
     @Override
     public boolean onMarkerClick(Marker marker) {
-
+        Park selectedPark = parkMarkerTrackMap.get(marker);
+        Log.d("Park name:", selectedPark.getName());
         return false;
     }
 }
