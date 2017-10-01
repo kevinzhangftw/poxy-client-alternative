@@ -8,7 +8,7 @@ public class Park {
 
     private String picture_url;
     private String name;
-    private int id;
+    private String id;
     private double latitude;
     private double longitude;
     private String wind;
@@ -18,7 +18,7 @@ public class Park {
     public Park() {
     }
 
-    public Park(String picture_url, String name, int id, double latitude, double longitude, String wind, float temperature, String cloud) {
+    public Park(String picture_url, String name, String id, double latitude, double longitude, String wind, float temperature, String cloud) {
         this.picture_url = picture_url;
         this.name = name;
         this.id = id;
@@ -45,11 +45,11 @@ public class Park {
         this.name = name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

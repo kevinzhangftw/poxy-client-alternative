@@ -70,6 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     @Override
                     public void onParsingFinished(Park[] parks) {
                         parklist = parks;
+                        //Populate the new parks.
                     }
                 });
             }
