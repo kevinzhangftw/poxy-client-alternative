@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 //Should be renamed to parklistactivity
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
@@ -57,12 +58,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onLocationResult(LocationResult locationResult) {
                 Location location = locationResult.getLastLocation();
                 LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                Globals.GUSERLOCATION = currentLocation;
                 mMap.addMarker(new MarkerOptions().position(currentLocation).title("Marker in Burnaby"));
 //                mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
                 setCameraPosition(currentLocation);
 
                 CharSequence text = String.format("lat:%f lng:%f", location.getLatitude(), location.getLongitude());
                 Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+
+                ParkGrabber.getInstance().grabAndParseParks(new ParkGrabber.ParkCallback() {
+                    @Override
+                    public void onParsingFinished(Park[] parks) {
+                        parklist = parks;
+                    }
+                });
             }
         };
     }
@@ -81,12 +90,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         thisActivity = this;
 
+        /*
         ParkGrabber.getInstance().grabAndParseParks(new ParkGrabber.ParkCallback() {
             @Override
             public void onParsingFinished(Park[] parks) {
                 parklist = parks;
             }
-        });
+        });*/
 
         parklist = MockGrabber.parks;
 

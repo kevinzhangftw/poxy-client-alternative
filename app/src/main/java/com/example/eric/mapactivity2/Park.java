@@ -12,13 +12,13 @@ public class Park {
     private double latitude;
     private double longitude;
     private String wind;
-    private int temperature;
+    private float temperature;
     private String cloud;
 
     public Park() {
     }
 
-    public Park(String picture_url, String name, int id, double latitude, double longitude, String wind, int temperature, String cloud) {
+    public Park(String picture_url, String name, int id, double latitude, double longitude, String wind, float temperature, String cloud) {
         this.picture_url = picture_url;
         this.name = name;
         this.id = id;
@@ -71,7 +71,7 @@ public class Park {
 
     public String getWind(){return wind;}
 
-    public int getTemperature(){return temperature;}
+    public float getTemperature(){return temperature;}
 
     public String getCloud(){return cloud;}
 }

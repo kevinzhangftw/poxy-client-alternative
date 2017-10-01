@@ -17,7 +17,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class PoxyServer {
-    private static final String SERVER_URL = "http://4cd5f260.ngrok.io/";
+    private static final String SERVER_URL = "https://poxypoxy.localtunnel.me";
+
+    public static String getBaseServerUrl(){
+        return SERVER_URL;
+    }
 
     private static Retrofit getRetrofitConnection(){
         return (new Retrofit.Builder()
