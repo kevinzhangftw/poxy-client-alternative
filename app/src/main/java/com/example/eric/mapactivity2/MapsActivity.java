@@ -21,6 +21,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
@@ -38,6 +39,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationRequest mLocationRequest;
     private LocationCallback mLocationCallback;
     private Park[] parklist;
+    private Marker curMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,18 +61,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Location location = locationResult.getLastLocation();
                 LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
                 Globals.GUSERLOCATION = currentLocation;
-                mMap.addMarker(new MarkerOptions().position(currentLocation).title("Marker in Burnaby"));
+
+                if (curMarker != null){
+                    curMarker.remove();
+                }
+                curMarker = mMap.addMarker(new MarkerOptions().position(currentLocation).title("Marker in Burnaby").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 //                mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
                 setCameraPosition(currentLocation);
 
-                CharSequence text = String.format("lat:%f lng:%f", location.getLatitude(), location.getLongitude());
-                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+                //Reenable to get location for debug purposes.
+                //CharSequence text = String.format("lat:%f lng:%f", location.getLatitude(), location.getLongitude());
+                //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
 
                 ParkGrabber.getInstance().grabAndParseParks(new ParkGrabber.ParkCallback() {
                     @Override
                     public void onParsingFinished(Park[] parks) {
                         parklist = parks;
                         //Populate the new parks.
+                        addParksToMap(parklist);
                     }
                 });
             }
@@ -98,8 +106,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 parklist = parks;
             }
         });*/
-
-        parklist = MockGrabber.parks;
 
         setMapFace(R.string.style_label_retro);
         setMapUiSettings();
@@ -131,10 +137,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void addParksToMap(Park[] parks) {
-        parklist = parks;
         for (Park park : parks) {
             LatLng ll = new LatLng(park.getLatitude(), park.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(ll).title(park.getName()));
+            mMap.addMarker(new MarkerOptions().position(ll).title(park.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+            //need to attach a listener to each marker.
         }
     }
 
@@ -180,7 +186,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        Log.d("onMarkerClick", "onMarkerClick: " + parklist[0].getName());
+
         return false;
     }
 }
