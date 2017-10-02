@@ -1,10 +1,13 @@
 package com.example.eric.mapactivity2;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by eric on 9/3/17.
  */
 
-public class Park {
+public class Park implements Parcelable{
 
     private String picture_url;
     private String name;
@@ -12,20 +15,48 @@ public class Park {
     private double latitude;
     private double longitude;
     private String wind;
-    private float temperature;
+    private float temp;
     private String cloud;
 
-    public Park() {
+    public void writeToParcel(Parcel dest, int flags){
+        dest.writeString(name);
+        dest.writeString(wind);
+        dest.writeString(cloud);
+        dest.writeString(picture_url);
+        dest.writeFloat(temp);
     }
 
-    public Park(String picture_url, String name, String id, double latitude, double longitude, String wind, float temperature, String cloud) {
+    public int describeContents(){
+        return 0;
+    }
+
+    private Park(Parcel in){
+        this.name = in.readString();
+        this.wind = in.readString();
+        this.cloud = in.readString();
+        this.picture_url = in.readString();
+        this.temp = in.readFloat();
+    }
+
+    public static final Parcelable.Creator<Park> CREATOR = new Parcelable.Creator<Park>(){
+        @Override
+        public Park createFromParcel(Parcel source){
+            return new Park(source);
+        }
+
+        public Park[] newArray(int size){
+            return new Park[size];
+        }
+    };
+
+    public Park(String picture_url, String name, String id, double latitude, double longitude, String wind, float temp, String cloud) {
         this.picture_url = picture_url;
         this.name = name;
         this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
         this.wind = wind;
-        this.temperature = temperature;
+        this.temp = temp;
         this.cloud = cloud;
     }
 
@@ -71,7 +102,7 @@ public class Park {
 
     public String getWind(){return wind;}
 
-    public float getTemperature(){return temperature;}
+    public float getTemperature(){return temp;}
 
     public String getCloud(){return cloud;}
 }

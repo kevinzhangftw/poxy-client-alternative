@@ -26,7 +26,7 @@ public class ParkDetailActivity extends AppCompatActivity {
  "main"=>{"temp"=>20.51, "pressure"=>1015, "humidity"=>64, "temp_min"=>20, "temp_max"=>21},
  "visibility"=>48279,
  "wind"=>{"speed"=>3.1, "deg"=>220},
- "clouds"=>{"all"=>40},
+ "clouds"=>{"a/ll"=>40},
  "dt"=>1502666100,
  "sys"=>{"type"=>1, "id"=>3359, "message"=>0.0041, "country"=>"CA", "sunrise"=>1502629343, "sunset"=>1502681348},
  "id"=>5911606,
@@ -38,13 +38,16 @@ public class ParkDetailActivity extends AppCompatActivity {
     private TextView txtDetails;
     private RelativeLayout mainLayout; //The base layout
     private String imageString;
+    private Park parkData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_park_detail);
         connectFormElements();
-        populateData(MockGrabber.parks[0]);
+
+        parkData = getIntent().getParcelableExtra("Park");
+        populateData(parkData);
     }
 
     private void connectFormElements(){
@@ -58,23 +61,30 @@ public class ParkDetailActivity extends AppCompatActivity {
         //imgView = ......thisPark.getPicture_url()
         //Picasso.with(getApplicationContext()).load(thisPark.getPicture_url()).fit().into(imgView);
 
-        Picasso.with(this).load(thisPark.getPicture_url()).into(new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                mainLayout.setBackground(new BitmapDrawable(bitmap));
-            }
-
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
-                Log.d("oBF", "Bitmap Failed to load");
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-                Log.d("oPL", "Bitmap Loading");
-            }
-        });
         imageString = thisPark.getPicture_url();
+
+        if (imageString != null && imageString.length() > 0) {
+            Picasso.with(this).load(imageString).into(new Target() {
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    mainLayout.setBackground(new BitmapDrawable(bitmap));
+                }
+
+                @Override
+                public void onBitmapFailed(Drawable errorDrawable) {
+                    Log.d("oBF", "Bitmap Failed to load");
+                }
+
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {
+                    Log.d("oPL", "Bitmap Loading");
+                }
+            });
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "No Image", Toast.LENGTH_LONG).show();
+        }
+
         txtName.setText(abbrevParkName(thisPark.getName()));
         final String parkName = thisPark.getName();
         txtName.setOnClickListener(new View.OnClickListener() {

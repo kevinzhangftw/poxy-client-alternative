@@ -3,6 +3,7 @@ package com.example.eric.mapactivity2;
 import android.app.Activity;
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
@@ -69,7 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (curMarker != null){
                     curMarker.remove();
                 }
-                curMarker = mMap.addMarker(new MarkerOptions().position(currentLocation).title("Marker in Burnaby").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                curMarker = mMap.addMarker(new MarkerOptions().position(currentLocation).title("UserLocation").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 //                mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
                 setCameraPosition(currentLocation);
 
@@ -197,8 +198,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+
+        if (marker.getTitle().equals("UserLocation")){return false;}
+
         Park selectedPark = parkMarkerTrackMap.get(marker);
+
+        Intent parkDetailIntent = new Intent(getApplicationContext(), ParkDetailActivity.class);
+        parkDetailIntent.putExtra("Park", selectedPark);
+        startActivity(parkDetailIntent);
+
         Log.d("Park name:", selectedPark.getName());
-        return false;
+        return true;
     }
 }
