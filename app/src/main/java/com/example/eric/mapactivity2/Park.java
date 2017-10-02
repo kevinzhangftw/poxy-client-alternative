@@ -24,6 +24,8 @@ public class Park implements Parcelable{
         dest.writeString(cloud);
         dest.writeString(picture_url);
         dest.writeFloat(temp);
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
     }
 
     public int describeContents(){
@@ -36,6 +38,8 @@ public class Park implements Parcelable{
         this.cloud = in.readString();
         this.picture_url = in.readString();
         this.temp = in.readFloat();
+        this.latitude = in.readDouble();
+        this.longitude = in.readDouble();
     }
 
     public static final Parcelable.Creator<Park> CREATOR = new Parcelable.Creator<Park>(){
