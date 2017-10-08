@@ -13,14 +13,6 @@
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp">
 
-        <ImageView
-            android:id="@+id/imgLogo"
-            android:layout_width="match_parent"
-            android:layout_height="304dp"
-            app:srcCompat="@drawable/hipsterlogogenerator_1500238544988"
-            tools:layout_editor_absoluteX="-1dp"
-            tools:layout_editor_absoluteY="2dp" />
-
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
@@ -58,6 +50,14 @@
             android:text="Register"
             tools:layout_editor_absoluteX="85dp"
             tools:layout_editor_absoluteY="437dp" />
+
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="304dp"
+            app:srcCompat="@drawable/hipsterlogogenerator_1500238544988"
+            tools:layout_editor_absoluteX="-1dp"
+            tools:layout_editor_absoluteY="2dp" />
 
         <TextView
             android:id="@+id/tvForgot"

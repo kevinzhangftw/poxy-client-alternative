@@ -7,14 +7,6 @@
     tools:context="com.example.eric.mapactivity2.RegisterActivity">
     <!--On register, the user should be immediately logged in, not redirected to sign in.-->
 
-    <ImageView
-        android:id="@+id/imageView2"
-        tools:layout_editor_absoluteX="-1dp"
-        tools:layout_editor_absoluteY="2dp"
-        android:layout_width="match_parent"
-        android:layout_height="304dp"
-        app:srcCompat="@drawable/hipsterlogogenerator_1500238544988" />
-
     <EditText
         android:id="@+id/etEmail"
         tools:layout_editor_absoluteX="85dp"
@@ -55,4 +47,12 @@
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:text="Register" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="304dp"
+        app:srcCompat="@drawable/hipsterlogogenerator_1500238544988"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="2dp" />
 </LinearLayout>
