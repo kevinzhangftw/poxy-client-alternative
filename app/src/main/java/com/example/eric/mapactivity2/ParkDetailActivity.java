@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -102,7 +101,23 @@ public class ParkDetailActivity extends AppCompatActivity {
             });
         }
         else{
-            Toast.makeText(getApplicationContext(), "No Image", Toast.LENGTH_LONG).show();
+            Picasso.with(this).load(R.drawable.noparkimage).into(new Target(){
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    mainLayout.setBackground(new BitmapDrawable(bitmap));
+                }
+
+                @Override
+                public void onBitmapFailed(Drawable errorDrawable) {
+                    Log.d("oBF", "Bitmap Failed to load");
+                }
+
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {
+                    Log.d("oPL", "Bitmap Loading");
+                }
+            });
+            //Toast.makeText(getApplicationContext(), "No Image", Toast.LENGTH_LONG).show();
         }
 
         txtName.setText(abbrevParkName(thisPark.getName()));
@@ -121,7 +136,7 @@ public class ParkDetailActivity extends AppCompatActivity {
             }
         });*/
         txtDetails.setText("Wind: " + thisPark.getWind() + "\n" +
-                           "Temp: " + thisPark.getTemperature() + "\n" +
+                           "Temp: " + (int)thisPark.getTemperature() + "°C\n" +
                            "Clouds: " + thisPark.getCloud());
 
     }
