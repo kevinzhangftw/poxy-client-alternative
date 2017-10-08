@@ -1,4 +1,4 @@
-package com.example.eric.mapactivity2.Networking.onboarding;
+package com.example.eric.natureparker.Networking.onboarding;
 
 import android.Manifest;
 import android.app.Activity;

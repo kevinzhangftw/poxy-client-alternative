@@ -1,4 +1,4 @@
-package com.example.eric.mapactivity2;
+package com.example.eric.natureparker;
 
 import org.junit.Test;
 

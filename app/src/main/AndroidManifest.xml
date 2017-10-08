@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.eric.mapactivity2">
+    package="com.example.eric.natureparker">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -35,7 +35,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.eric.natureparker.MainActivity"
             android:label="@string/title_activity_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,12 +43,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MapsActivity" />
-        <activity android:name=".SplashActivity" />
-        <activity android:name=".ParkDetailActivity" />
-        <activity android:name=".SigninActivity"/>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".Networking.onboarding.LocationPermissionActivity"></activity>
+        <activity android:name="com.example.eric.natureparker.MapsActivity" />
+        <activity android:name="com.example.eric.natureparker.SplashActivity" />
+        <activity android:name="com.example.eric.natureparker.ParkDetailActivity" />
+        <activity android:name="com.example.eric.natureparker.SigninActivity"/>
+        <activity android:name="com.example.eric.natureparker.RegisterActivity" />
+        <activity android:name="com.example.eric.natureparker.Networking.onboarding.LocationPermissionActivity"></activity>
     </application>
 
 </manifest>

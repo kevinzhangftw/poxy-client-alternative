@@ -1,4 +1,4 @@
-package com.example.eric.mapactivity2.Networking;
+package com.example.eric.natureparker.Networking;
 
 import com.google.gson.annotations.SerializedName;
 

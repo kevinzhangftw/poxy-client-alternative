@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.eric.mapactivity2.RegisterActivity">
+    tools:context="com.example.eric.natureparker.RegisterActivity">
     <!--On register, the user should be immediately logged in, not redirected to sign in.-->
 
     <EditText

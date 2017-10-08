@@ -1,4 +1,4 @@
-package com.example.eric.mapactivity2.Networking;
+package com.example.eric.natureparker.Networking;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
