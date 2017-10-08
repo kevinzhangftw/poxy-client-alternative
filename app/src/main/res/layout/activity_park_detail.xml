@@ -5,44 +5,45 @@
     android:layout_height="match_parent"
     android:id="@+id/activity_park_layout"
     android:weightSum="1">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:id="@+id/nameLayout"
+        android:background="#94000000">
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="roboto"
+            android:includeFontPadding="true"
+            android:paddingRight="30dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/detailLayout"
         android:layout_width="wrap_content"
-        android:layout_height="180dp"
-        android:background="#88676767"
+        android:layout_height="120dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="48dp"
-        android:id="@+id/relativeLayout">
+        android:background="#94000000">
 
         <Button
             android:id="@+id/btnSV"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:alpha="0.5"
-            android:background="@mipmap/mapsicon"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true" />
-
-        <TextView
-            android:id="@+id/txtName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:layout_weight="0.13"
-            android:fontFamily="roboto"
-            android:includeFontPadding="true"
-            android:paddingRight="30dp"
-            android:text="TextView"
-            android:textAlignment="textEnd"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="80dp"/>
+            android:layout_alignParentLeft="true"
+            android:alpha="0.5"
+            android:background="@mipmap/mapsicon" />
 
         <TextView
             android:id="@+id/txtDetails"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:ems="10"
