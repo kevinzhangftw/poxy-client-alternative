@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Nature Parker</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps">Parker</string>
     <string name="style_label_retro">Retro</string>
     <string name="style_label_night">Night</string>
 </resources>
