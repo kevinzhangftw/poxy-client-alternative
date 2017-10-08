@@ -58,13 +58,14 @@ public class SigninActivity extends AppCompatActivity {
             }
         });
 
-        imgLogo.setOnClickListener(new View.OnClickListener() {
+        /*imgLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent parkListintent = new Intent(getBaseContext(), ParkDetailActivity.class);
                 startActivity(parkListintent);
             }
         });
+        */
     }
 
     /**
