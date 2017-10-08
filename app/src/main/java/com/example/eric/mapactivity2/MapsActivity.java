@@ -121,6 +121,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void setMapUiSettings() {
         mMap.getUiSettings().setTiltGesturesEnabled(false);
+        mMap.getUiSettings().setScrollGesturesEnabled(false);
+        mMap.getUiSettings().setZoomControlsEnabled(false);
         mMap.getUiSettings().setCompassEnabled(false);
 
     }
