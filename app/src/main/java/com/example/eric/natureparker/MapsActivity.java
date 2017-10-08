@@ -1,4 +1,4 @@
-package com.example.eric.mapactivity2;
+package com.example.eric.natureparker;
 
 import android.app.Activity;
 import android.Manifest;
@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;

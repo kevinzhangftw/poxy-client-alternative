@@ -1,4 +1,4 @@
-package com.example.eric.mapactivity2;
+package com.example.eric.natureparker;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -1,13 +1,13 @@
-package com.example.eric.mapactivity2.Networking.onboarding;
+package com.example.eric.natureparker.Networking.onboarding;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.example.eric.mapactivity2.R;
+import com.example.eric.natureparker.R;
 
-import com.example.eric.mapactivity2.MapsActivity;
+import com.example.eric.natureparker.MapsActivity;
 
 public class LocationPermissionActivity extends AppCompatActivity {
 

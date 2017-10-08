@@ -1,8 +1,6 @@
-package com.example.eric.mapactivity2;
+package com.example.eric.natureparker;
 
 import android.util.Log;
-import android.util.LruCache;
-import android.widget.Toast;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -11,18 +9,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.NoCache;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.eric.mapactivity2.Networking.PoxyServer;
+import com.example.eric.natureparker.Networking.PoxyServer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
-import org.json.JSONArray;
 
 /**
  * Created by eric on 9/3/17.

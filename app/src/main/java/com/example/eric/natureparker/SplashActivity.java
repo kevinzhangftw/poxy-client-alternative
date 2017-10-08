@@ -1,4 +1,4 @@
-package com.example.eric.mapactivity2;
+package com.example.eric.natureparker;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,10 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.eric.mapactivity2.Networking.AuthCallback;
-import com.example.eric.mapactivity2.Networking.Badge;
-import com.example.eric.mapactivity2.Networking.PoxyServer;
-import com.example.eric.mapactivity2.Networking.UserState;
+import com.example.eric.natureparker.Networking.AuthCallback;
+import com.example.eric.natureparker.Networking.Badge;
+import com.example.eric.natureparker.Networking.PoxyServer;
+import com.example.eric.natureparker.Networking.UserState;
 
 public class SplashActivity extends AppCompatActivity {
 

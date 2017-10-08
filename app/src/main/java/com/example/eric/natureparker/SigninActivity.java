@@ -1,4 +1,4 @@
-package com.example.eric.mapactivity2;
+package com.example.eric.natureparker;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,11 +9,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.eric.mapactivity2.Networking.Badge;
-import com.example.eric.mapactivity2.Networking.BadgeCallback;
-import com.example.eric.mapactivity2.Networking.LoginCred;
-import com.example.eric.mapactivity2.Networking.PoxyServer;
-import com.example.eric.mapactivity2.Networking.UserState;
+import com.example.eric.natureparker.Networking.Badge;
+import com.example.eric.natureparker.Networking.BadgeCallback;
+import com.example.eric.natureparker.Networking.LoginCred;
+import com.example.eric.natureparker.Networking.PoxyServer;
+import com.example.eric.natureparker.Networking.UserState;
 
 /**
  * This activity handles sign-in attempts.

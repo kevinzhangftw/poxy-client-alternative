@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.eric.mapactivity2.ParkDetailActivity">
+    tools:context="com.example.eric.natureparker.ParkDetailActivity">
 
 
 </android.support.constraint.ConstraintLayout>
