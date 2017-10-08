@@ -1,4 +1,4 @@
-//package com.example.eric.mapactivity2;
+//package com.poxy.eric.natureparker;
 //
 //import com.android.volley.AuthFailureError;
 //import com.android.volley.NetworkResponse;
