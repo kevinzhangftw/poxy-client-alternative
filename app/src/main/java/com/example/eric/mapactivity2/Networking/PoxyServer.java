@@ -17,7 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class PoxyServer {
-    private static final String SERVER_URL = "https://poxypoxy.localtunnel.me";
+    //private static final String SERVER_URL = "https://poxypoxy.localtunnel.me";
+    private static final String SERVER_URL = "https://poxypoxy.herokuapp.com";
 
     public static String getBaseServerUrl(){
         return SERVER_URL;

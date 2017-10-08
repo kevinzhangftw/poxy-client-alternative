@@ -68,7 +68,7 @@ public class ParkDetailActivity extends AppCompatActivity {
     }
 
     private void launchGoogleMaps(){
-        Uri gmmIntentUri = Uri.parse("google.navigation:q=cbll=" + parkData.getLatitude() + "," + parkData.getLongitude());
+        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + parkData.getLatitude() + "," + parkData.getLongitude());
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);
